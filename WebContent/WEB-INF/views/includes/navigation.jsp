@@ -6,26 +6,26 @@
 		<div id="navigation">
 			<ul>
 			<c:choose>
-				<c:when test = '${prarm.menu == "main" }'>
+				<c:when test = '${param.menu == "main" }'>
 					<li class="selected"><a href="${pageContext.servletContext.contextPath }">정우현</a></li>
 					<li><a href="${pageContext.servletContext.contextPath }/guestbook">방명록</a></li>
 					<li><a href="${pageContext.servletContext.contextPath }/board">게시판</a></li>
 				</c:when>
 				
-				<c:when test = '${prarm.menu == "guestbook" }'>
+				<c:when test = '${param.menu == "guestbook" }'>
 					<li><a href="${pageContext.servletContext.contextPath }">정우현</a></li>
 					<li class="selected"><a href="${pageContext.servletContext.contextPath }/guestbook">방명록</a></li>
 					<li><a href="${pageContext.servletContext.contextPath }/board">게시판</a></li>
 				</c:when>
 				
-				<c:when test = '${prarm.menu == "board" }'>
+				<c:when test = '${param.menu == "board" }'>
 					<li><a href="${pageContext.servletContext.contextPath }">정우현</a></li>
 					<li><a href="${pageContext.servletContext.contextPath }/guestbook">방명록</a></li>
 					<li class="selected"><a href="${pageContext.servletContext.contextPath }/board">게시판</a></li>
 				</c:when>
 				
 				<c:otherwise>
-						<li><a href="${pageContext.servletContext.contextPath }">안대혁</a></li>
+						<li><a href="${pageContext.servletContext.contextPath }">정우현</a></li>
 						<li><a href="${pageContext.servletContext.contextPath }/guestbook">방명록</a></li>
 						<li><a href="${pageContext.servletContext.contextPath }/board">게시판</a></li>
 					</c:otherwise>
