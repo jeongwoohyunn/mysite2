@@ -9,7 +9,40 @@ import java.sql.SQLException;
 import com.douzone.mysite.vo.UserVo;
 
 public class UserDao {
-	
+public UserVo update(UserVo userVo) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql ="update user set name=?, gender=? where no="+userVo.getNo();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userVo.getName());
+			pstmt.setString(2, userVo.getGender());
+			
+			pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Error : "+e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return userVo;
+	}
 	public UserVo get(String email,String password) {
 		UserVo result = null;
 		Connection conn = null;
@@ -58,7 +91,51 @@ public class UserDao {
 
 		return result;
 	}
-	
+	public UserVo get(Long no) {
+		UserVo result = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnection();
+			
+			String sql ="select name, email, gender from user where no="+no;
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String name = rs.getString(1);
+				String email = rs.getString(2);
+				String gender = rs.getString(3);
+				
+				result = new UserVo();
+				result.setNo(no);
+				result.setName(name);
+				result.setEmail(email);
+				result.setGender(gender);
+			}
+				
+		} catch (SQLException e) {
+			System.out.println("Error : "+e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(rs != null) {
+					rs.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
 	public int insert(UserVo vo) {
 		int count = 0;
 		Connection conn = null;
@@ -113,5 +190,6 @@ public class UserDao {
 		} 
 		
 		return conn;
-	}	
+	}
+
 }

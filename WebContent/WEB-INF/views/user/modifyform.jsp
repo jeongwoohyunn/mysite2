@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,40 +11,49 @@
 </head>
 <body>
 	<div id="container">
-		<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
+		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="user">
 
-				<form id="join-form" name="joinForm" method="post" action="<%=request.getContextPath() %>/user">
-					<input type="hidden" name="a" value="modify"/>
-					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="">
+				<form id="join-form" name="joinForm" method="post"
+					action="${pageContext.servletContext.contextPath }/user">
+					<input type="hidden" name="a" value="modify" /> <input
+						type="hidden" name="no" value="${vo.no }" /> <label class="block-label"
+						for="name">이름</label> <input id="name" name="name" type="text"
+						value="${vo.name }"> <label class="block-label"
+						for="email">이메일</label>
 
-					<label class="block-label" for="email">이메일</label>
-					<input id="email" name="email" type="text" value="">
-					<input type="button" value="id 중복체크">
-					<h3>hihit22@naver.com</h3>
-					
-					<label class="block-label">패스워드</label>
-					<input name="password" type="password" value="">
-					
+					<h3>${vo.email }</h3>
+					<label class="block-label">비밀번호</label> <input name="password"
+						type="password" value="">
+
 					<fieldset>
 						<legend>성별</legend>
-						<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
-						<label>남</label> <input type="radio" name="gender" value="male">
-						<!--  
-						<label>여</label> <input type="radio" name="gender" value="female">
-						<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
-						-->
+						<!-- 성별같은건 라디오그룹 -->
+						<c:if test='${vo.gender == "female"}'>
+							<label>여</label>
+							<input type="radio" name="gender" value="female"
+								checked="checked">
+							<label>남</label>
+							<input type="radio" name="gender" value="male">
+
+						</c:if>
+						<c:if test='${vo.gender == "male" }'>
+							<label>여</label>
+							<input type="radio" name="gender" value="female">
+							<label>남</label>
+							<input type="radio" name="gender" value="male" checked="checked">
+						</c:if>
+
 					</fieldset>
-					
+
 					<input type="submit" value="수정하기">
-					
+
 				</form>
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/includes/navigation.jsp"/>
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
+		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
 </html>

@@ -16,24 +16,24 @@ public class IndexAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		//Cookie Test
 		
-		//쿠키읽기
-		int count =1;
-		Cookie[] cookies = request.getCookies();
-		if(cookies != null&cookies.length>0) {
-			for (Cookie c : cookies) {
-				
-				if("visitCount".equals(c.getName())) {
-					count = Integer.parseInt(c.getValue());
-					break;
-				}
-			}
-		}
-		//쿠키 쓰기
-		count++;
-		Cookie cookie = new Cookie("visitCount", ""+count);
-		cookie.setMaxAge(24*60*60);//초단위 세팅 여기를 -1로하면 메모리에 남게된다.
-		cookie.setPath(request.getContextPath());//경로도 남기기
-		response.addCookie(cookie);
+//		//쿠키읽기
+//		int count =0;
+//		Cookie[] cookies = request.getCookies();
+//		if(cookies != null && cookies.length>0) {
+//			for (Cookie c : cookies) {
+//				
+//				if("visitCount".equals(c.getName())) {
+//					count = Integer.parseInt(c.getValue());
+//					break;
+//				}
+//			}
+//		}
+//		//쿠키 쓰기
+//		count++;
+//		Cookie cookie = new Cookie("visitCount", ""+count);
+//		cookie.setMaxAge(24*60*60);//초단위 세팅 여기를 -1로하면 메모리에 남게된다.
+//		cookie.setPath(request.getContextPath());//경로도 남기기
+//		response.addCookie(cookie);
 		WebUtils.forward(request, response, "/WEB-INF/views/main/index.jsp");
 	}
 
