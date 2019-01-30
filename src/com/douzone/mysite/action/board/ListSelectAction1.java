@@ -1,31 +1,30 @@
-package com.douzone.mysite.action.guestbook;
+package com.douzone.mysite.action.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.douzone.mvc.action.Action;
 import com.douzone.mvc.util.WebUtils;
+import com.douzone.mysite.repository.BoardDao;
 import com.douzone.mysite.repository.GuestbookDao;
+import com.douzone.mysite.vo.BoardVo;
 import com.douzone.mysite.vo.GuestbookVo;
 
-public class ListInsertAction implements  Action{
+public class ListSelectAction1 implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String name = request.getParameter("name");
-		String password = request.getParameter("pass");
-		String message = request.getParameter("content");
 		
-		GuestbookVo vo = new GuestbookVo();
-		vo.setName(name);
-		vo.setPassword(password);
-		vo.setMessage(message);
+		BoardDao dao = new BoardDao();
+		List<BoardVo> list = dao.getList();
+		request.setAttribute("list", list);
 		
-		new GuestbookDao().insert(vo);
+		WebUtils.forward(request, response, "/WEB-INF/views/board/list.jsp");
 		
-		WebUtils.redirect(request, response, request.getContextPath()+"/guestbook?a=select");
 	}
 
 }
