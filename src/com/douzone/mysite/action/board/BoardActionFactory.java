@@ -17,18 +17,22 @@ public class BoardActionFactory extends AbstractActionFactory {
 		} else if ("view".equals(actionName)) {
 			action = new ViewAction();
 		} else if ("modify".equals(actionName)) {
-			action = new ModifyFormAction();
+			
+			System.out.println("2");
+			action = new ModifyAction();
 		} else if ("write".equals(actionName)) {
 			action = new WriteAction();
 		} else if ("select".equals(actionName)) {
 			action = new ListSelectAction1();
 		} else if ("delete".equals(actionName)) {
 			action = new DeleteAction1();
-		} else if ("modifyaction".equals(actionName)) {
+		} else if ("modifyformaction".equals(actionName)) {
 			action = new ModifyFormAction();
 		} else if ("reply".equals(actionName)) {
 			action = new ReplyAction();
-		} else {
+		} else if ("replyform".equals(actionName)) {
+			action = new ReplyFormAction();
+		}else {
 			action = new IndexAction();
 		}
 		return action;

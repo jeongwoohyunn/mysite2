@@ -24,5 +24,4 @@ public class ListAction1 implements Action{
 		request.setAttribute("session",session.getAttribute("authuser"));
 		WebUtils.forward(request, response, "/WEB-INF/views/board/list.jsp");
 	}
-
 }

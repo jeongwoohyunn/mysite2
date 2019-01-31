@@ -36,7 +36,7 @@
 							<c:if test="${vo.depth !=0 }">
 							<img src="${pageContext.servletContext.contextPath }/assets/images/reply.png">
 							</c:if>
-							 --%><td><a href="${pageContext.servletContext.contextPath }/board?a=view&title=${vo.title }&contents=${vo.contents }">${vo.title }</a></td>
+							 --%><td><a href="${pageContext.servletContext.contextPath }/board?a=view&no=${vo.no}">${vo.title }</a></td>
 							<td>${vo.name }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.write_date }</td>
@@ -69,8 +69,7 @@
 					</c:when>
 					<c:otherwise>
 						<div class="bottom">
-							<a
-								href="${pageContext.servletContext.contextPath }/board?a=write"
+							<a href="${pageContext.servletContext.contextPath }/board?a=write"
 								id="new-book">글쓰기</a>
 						</div>
 					</c:otherwise>

@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.douzone.mvc.action.Action;
 import com.douzone.mvc.util.WebUtils;
-import com.douzone.mysite.repository.BoardDao;
 
-public class ModifyAction implements Action {
+public class ReplyFormAction implements Action {
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-			
-		WebUtils.forward(request, response, "/WEB-INF/views/board/modify.jsp");
+		HttpServletResponse respnonse = null;
+		request.setAttribute("no", request.getParameter("no"));
+		WebUtils.forward(request, respnonse, "/WEB-INF/views/board/reply.jsp");
 	}
+
 }
