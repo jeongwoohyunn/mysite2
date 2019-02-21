@@ -11,21 +11,19 @@ public class BoardActionFactory extends AbstractActionFactory {
 		Action action = null;
 
 		if ("list".equals(actionName)) {
-			action = new ListAction1();
+			action = new ListAction();
 		} else if ("insert".equals(actionName)) {
-			action = new ListInsertAction1();
+			action = new ListInsertAction();
 		} else if ("view".equals(actionName)) {
 			action = new ViewAction();
 		} else if ("modify".equals(actionName)) {
-			
-			System.out.println("2");
 			action = new ModifyAction();
 		} else if ("write".equals(actionName)) {
 			action = new WriteAction();
 		} else if ("select".equals(actionName)) {
-			action = new ListSelectAction1();
+			action = new ListSelectAction();
 		} else if ("delete".equals(actionName)) {
-			action = new DeleteAction1();
+			action = new DeleteAction();
 		} else if ("modifyformaction".equals(actionName)) {
 			action = new ModifyFormAction();
 		} else if ("reply".equals(actionName)) {

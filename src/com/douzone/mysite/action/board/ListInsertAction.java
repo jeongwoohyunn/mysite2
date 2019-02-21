@@ -14,7 +14,7 @@ import com.douzone.mysite.vo.BoardVo;
 import com.douzone.mysite.vo.UserVo;
 
 
-public class ListInsertAction1 implements Action{
+public class ListInsertAction implements Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

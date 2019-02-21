@@ -21,7 +21,7 @@ public class ReplyAction implements Action {
 		String no = request.getParameter("no");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
-		
+
 		List<BoardVo> list = new BoardDao().getList(no);
 		
 		long group_no = list.get(0).getGroup_no();
@@ -29,7 +29,6 @@ public class ReplyAction implements Action {
 		long depth = list.get(0).getDepth() + 1;
 		
 		HttpSession session = request.getSession();
-		HttpServletResponse respnonse=null;
 		UserVo uv = (UserVo)session.getAttribute("authuser");
 		
 		BoardVo vo = new BoardVo();
@@ -44,11 +43,10 @@ public class ReplyAction implements Action {
 		vo1.setGroup_no(group_no);
 		vo1.setOrder_no(order_no);
 		
-		//new BoardDao().update(vo1);
-		
+		new BoardDao().update(vo1);
 		new BoardDao().insert(vo);
 		
-		WebUtils.redirect(request, respnonse, request.getContextPath() + "/board?a=list");
+		WebUtils.redirect(request, response, request.getContextPath() + "/board?a=list");
 	}
 
 }

@@ -32,16 +32,18 @@
 					<c:forEach items="${list}" var="vo" varStatus="status">
 						<tr>
 							<td>[${status.index+1 }]</td>
-							<%-- <td style="padding-left:${25*vo.depth }px;">
+							<td style="padding-left:${25*vo.depth }px;">
 							<c:if test="${vo.depth !=0 }">
-							<img src="${pageContext.servletContext.contextPath }/assets/images/reply.png">
-							</c:if>
-							 --%><td><a href="${pageContext.servletContext.contextPath }/board?a=view&no=${vo.no}">${vo.title }</a></td>
+									<img
+										src="${pageContext.servletContext.contextPath }/assets/images/reply.png">
+								</c:if>
+							<a
+								href="${pageContext.servletContext.contextPath }/board?a=view&no=${vo.no}">${vo.title }</a></td>
 							<td>${vo.name }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.write_date }</td>
-							<td>
-							<a href="${pageContext.servletContext.contextPath }/board?a=delete&no=${vo.no}"
+							<td><a
+								href="${pageContext.servletContext.contextPath }/board?a=delete&no=${vo.no}"
 								class="del"> <img src="/mysite2/assets/images/recycle.png"></img></a>
 							</td>
 						</tr>
@@ -69,7 +71,8 @@
 					</c:when>
 					<c:otherwise>
 						<div class="bottom">
-							<a href="${pageContext.servletContext.contextPath }/board?a=write"
+							<a
+								href="${pageContext.servletContext.contextPath }/board?a=write"
 								id="new-book">글쓰기</a>
 						</div>
 					</c:otherwise>

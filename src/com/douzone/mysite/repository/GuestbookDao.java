@@ -12,6 +12,71 @@ import java.util.List;
 import com.douzone.mysite.vo.GuestbookVo;
 
 public class GuestbookDao {
+	
+	public List<GuestbookVo> getList() {
+		List<GuestbookVo> list = new ArrayList<GuestbookVo>();
+		//get해올때는 따로 count나 없다. 타입도 List
+		//pstmt도 x
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+
+			// Statement 객체 생성
+			stmt = conn.createStatement();
+
+			// SQL문 실행
+			String sql =
+				"   select no," + 
+				"          name," + 
+				"	       message," + 
+				"     	   date_format(reg_date, '%Y-%m-%d %h:%i:%s')" + 
+				"     from guestbook" + 
+				" order by reg_date desc";
+			rs = stmt.executeQuery( sql );
+
+			// 결과 가져오기(사용하기)
+			while (rs.next()) {
+				//값을 가져와서
+				Long no = rs.getLong(1);
+				String name = rs.getString(2);
+				String message = rs.getString(3);
+				String regDate = rs.getString(4);
+
+				//객체 생성후 넣어준다.
+				GuestbookVo vo = new GuestbookVo();
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setMessage( message );
+				vo.setRegDate( regDate );
+
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("error :" + e);
+		} finally {
+			// 자원 정리
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+
+	
 	public int delete( GuestbookVo vo ) {
 		int count = 0;
 		Connection conn = null;
@@ -87,66 +152,6 @@ public class GuestbookDao {
 		}
 
 		return count;
-	}
-
-	public List<GuestbookVo> getList() {
-		List<GuestbookVo> list = new ArrayList<GuestbookVo>();
-
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-
-		try {
-			conn = getConnection();
-
-			// Statement 객체 생성
-			stmt = conn.createStatement();
-
-			// SQL문 실행
-			String sql =
-				"   select no," + 
-				"          name," + 
-				"	       message," + 
-				"     	   date_format(reg_date, '%Y-%m-%d %h:%i:%s')" + 
-				"     from guestbook" + 
-				" order by reg_date desc";
-			rs = stmt.executeQuery( sql );
-
-			// 결과 가져오기(사용하기)
-			while (rs.next()) {
-				Long no = rs.getLong(1);
-				String name = rs.getString(2);
-				String message = rs.getString(3);
-				String regDate = rs.getString(4);
-
-				GuestbookVo vo = new GuestbookVo();
-				vo.setNo(no);
-				vo.setName(name);
-				vo.setMessage( message );
-				vo.setRegDate( regDate );
-
-				list.add(vo);
-			}
-		} catch (SQLException e) {
-			System.out.println("error :" + e);
-		} finally {
-			// 자원 정리
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return list;
 	}
 
 	private Connection getConnection() throws SQLException {

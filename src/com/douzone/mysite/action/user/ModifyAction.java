@@ -25,10 +25,8 @@ public class ModifyAction implements Action {
 		vo.setGender(gender);
 		
 		UserVo authuser = new UserDao().update(vo);
-		
 		HttpSession session = request.getSession();
 		session.setAttribute("authuser", authuser);
-		
 		WebUtils.redirect(request, response, request.getContextPath());
 		
 

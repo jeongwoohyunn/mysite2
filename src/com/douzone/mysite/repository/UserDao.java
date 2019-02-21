@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import com.douzone.mysite.vo.UserVo;
 
 public class UserDao {
-	public UserVo update(UserVo userVo) {
+	public UserVo update(UserVo vo) {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -17,11 +17,11 @@ public class UserDao {
 		try {
 			conn = getConnection();
 
-			String sql = "update user set name=?, gender=? where no=" + userVo.getNo();
+			String sql = "update user set name=?,gender=? where no=" + vo.getNo();
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, userVo.getName());
-			pstmt.setString(2, userVo.getGender());
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getGender());
 
 			pstmt.executeUpdate();
 
@@ -40,7 +40,7 @@ public class UserDao {
 			}
 		}
 
-		return userVo;
+		return vo;
 	}
 
 	public UserVo get(String email, String password) {

@@ -18,7 +18,6 @@ public class ListSelectAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		GuestbookDao dao = new GuestbookDao();
 		List<GuestbookVo> list = dao.getList();
-		
 		request.setAttribute("list", list);
 		
 		WebUtils.forward(request, response, "/WEB-INF/views/guestbook/list.jsp");

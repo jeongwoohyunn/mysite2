@@ -11,17 +11,20 @@ import javax.servlet.http.HttpSession;
 import com.douzone.mvc.action.Action;
 import com.douzone.mvc.util.WebUtils;
 import com.douzone.mysite.repository.BoardDao;
+import com.douzone.mysite.repository.GuestbookDao;
 import com.douzone.mysite.vo.BoardVo;
+import com.douzone.mysite.vo.GuestbookVo;
 
-public class ListAction1 implements Action{
-
+public class ListSelectAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		HttpSession session = request.getSession();
+		
 		BoardDao dao = new BoardDao();
 		List<BoardVo> list = dao.getList();
 		request.setAttribute("list", list);
-		request.setAttribute("session",session.getAttribute("authuser"));
+		
 		WebUtils.forward(request, response, "/WEB-INF/views/board/list.jsp");
+		
 	}
+
 }

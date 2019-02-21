@@ -13,9 +13,8 @@ public class ReplyFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		HttpServletResponse respnonse = null;
 		request.setAttribute("no", request.getParameter("no"));
-		WebUtils.forward(request, respnonse, "/WEB-INF/views/board/reply.jsp");
+		WebUtils.forward(request, response, "/WEB-INF/views/board/reply.jsp");
 	}
 
 }

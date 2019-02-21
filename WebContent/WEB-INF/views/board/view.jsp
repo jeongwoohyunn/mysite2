@@ -1,9 +1,11 @@
+<%@page import="com.douzone.mysite.vo.UserVo"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	pageContext.setAttribute("newline", "\n");
+	UserVo sessionVo = (UserVo) request.getAttribute("session");
+	String no = (String) request.getAttribute("no");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,31 +21,32 @@
 		<div id="content">
 		
 			<div id="board" class="board-form">
-			
+				<c:forEach items="${list}" var="vo" varStatus = "status">
 				<table class="tbl-ex">
 					<tr>
 						<th colspan="2">글보기</th>
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>${title }</td>
+						<td>${vo.title }</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
-							<div class="view-content">${contents}
+							<div class="view-content">${vo.contents}
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.servletContext.contextPath }/board?a=modifyformaction&no=${no}">답글달기</a>
+					<a href="${pageContext.servletContext.contextPath }/board?a=replyform&no=${no}">답글달기</a>
 					<a href="${pageContext.servletContext.contextPath }/board?a=list">글목록</a>
 
-					<c:if test="${!empty session && user_no == session.no}">
+					<c:if test="${!empty session && vo.user_no == session.no}">
 						<a href="${pageContext.servletContext.contextPath }/board?a=modify&no=${no}">글수정</a>
 					</c:if>
 				</div>
+				</c:forEach>
 			</div>
 		</div>
 		

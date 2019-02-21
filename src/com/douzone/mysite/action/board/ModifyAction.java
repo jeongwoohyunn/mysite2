@@ -12,8 +12,9 @@ import com.douzone.mysite.repository.BoardDao;
 
 public class ModifyAction implements Action {
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-			
-		WebUtils.forward(request, response, "/WEB-INF/views/board/modify.jsp");
+	public void execute(HttpServletRequest request, HttpServletResponse respnonse)
+			throws IOException, ServletException {
+		request.setAttribute("no", request.getParameter("no"));
+		WebUtils.forward(request, respnonse, "/WEB-INF/views/board/modify.jsp");
 	}
 }

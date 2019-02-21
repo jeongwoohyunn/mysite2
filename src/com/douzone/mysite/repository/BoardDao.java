@@ -89,6 +89,48 @@ public class BoardDao {
 		
 		return result;
 	}
+	
+	public boolean update(long no, String title, String content)
+	{
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try 
+		{
+			 conn = getConnection();
+			 
+			 String sql = "update board set title = ?, contents = ? where no = ?";
+			 
+			 pstmt = conn.prepareCall(sql);
+			 
+			 pstmt.setString(1, title);
+			 pstmt.setString(2, content);
+			 pstmt.setLong(3, no);
+			 int count = pstmt.executeUpdate();
+			 result = count == 1;
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("error : " + e);
+		}
+		finally 
+		{
+			try 
+			{
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
 	public boolean update(BoardVo vo)
 	{
 		boolean result = false;
@@ -99,10 +141,14 @@ public class BoardDao {
 		{
 			 conn = getConnection();
 			 
-			 String sql = "update board set title=?, contents=? where no="+vo.getNo();
+			 String sql = "update board set order_no = ? + 1 where group_no = ? and order_no >= ?";
+			 
 			 pstmt = conn.prepareCall(sql);
-			 pstmt.setString(1, vo.getTitle());
-			 pstmt.setString(2, vo.getContents());
+			 
+			 pstmt.setLong(1, vo.getOrder_no());
+			 pstmt.setLong(2, vo.getGroup_no());
+			 pstmt.setLong(3, vo.getOrder_no());
+			 
 			 int count = pstmt.executeUpdate();
 			 result = count == 1;
 		} 
@@ -413,7 +459,7 @@ public class BoardDao {
 
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
-			pstmt.setLong(3, vo.getNo());
+			pstmt.setLong(3, vo.getGroup_no());
 			pstmt.setLong(4, vo.getOrder_no());
 			pstmt.setLong(5, vo.getDepth());
 			pstmt.setLong(6, vo.getUser_no());
