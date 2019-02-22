@@ -11,24 +11,18 @@ public class BoardVo {
 	private Long order_no;
 	private Long depth;
 	private Long user_no;
-	private Long uno;
-	public Long getUno() {
-		return uno;
+	private long totalCount;
+	public Long getNo() {
+		return no;
 	}
-	public void setUno(Long uno) {
-		this.uno = uno;
+	public void setNo(Long no) {
+		this.no = no;
 	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Long getNo() {
-		return no;
-	}
-	public void setNo(Long no) {
-		this.no = no;
 	}
 	public String getTitle() {
 		return title;
@@ -78,12 +72,17 @@ public class BoardVo {
 	public void setUser_no(Long user_no) {
 		this.user_no = user_no;
 	}
+	public long getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(long totalCount) {
+		this.totalCount = totalCount;
+	}
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", name=" + name + ", title=" + title + ", contents=" + contents + ", write_date="
 				+ write_date + ", hit=" + hit + ", group_no=" + group_no + ", order_no=" + order_no + ", depth=" + depth
-				+ ", user_no=" + user_no + ", uno=" + uno + "]";
+				+ ", user_no=" + user_no + ", totalCount=" + totalCount + "]";
 	}
-	
-	
+
 }
